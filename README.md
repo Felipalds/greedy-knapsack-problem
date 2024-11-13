@@ -12,7 +12,7 @@ Binary Knapsack Solution:
 Implemented using a greedy approach. Items are sorted by value-to-weight ratio, achieving a time complexity of O(n log n) for sorting and O(n) for item selection.
 This approach provides an efficient and optimal solution for fractional item selection scenarios.
 Performance Analysis
-The project includes benchmarks to analyze the time complexity and performance of each algorithm on various input sizes and capacities. The benchmarks illustrate the difference between dynamic programming and greedy approaches, highlighting when each is most efficient.
+The project includes benchmarks to analyze the time complexity and performance of each algorithm on various input sizes and capacities
 
 ## Getting Started
 Clone the repository and compile the provided C++ files to experiment with each knapsack solution. Sample inputs and benchmark scripts are provided to facilitate testing and evaluation.
