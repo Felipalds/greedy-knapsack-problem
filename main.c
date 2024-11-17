@@ -27,6 +27,7 @@ int main(int argc, char** args) {
         sum_weight += bin_problem.items[bin_problem.solution[i]].weight;
     }
 
+    printf("Bag capacity: %i\n", bin_problem.capacity);
     printf("Total profit: %i\n", sum_profit);
     printf("Total weight: %i\n", sum_weight);
     printf("Time taken: %lf seconds\n", bin_problem.time_taken);

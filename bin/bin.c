@@ -103,11 +103,6 @@ int* bin_algorithm(BinItemStruct *items, int items_count, int *solution_size, in
 
     merge_sort(items, 0, items_count - 1);
 
-    for (int i = 0; i < items_count; i++)
-    {
-        printf("Profit/Weight: %f\n", items[i].profit_weight_ratio);
-    }
-
     int capacity = 0;
     int i = 0;
 
@@ -133,8 +128,6 @@ void run_bin_algorithm(BinProblemStruct *problem)
 
     fscanf(file, "%i", &capacity);
     while (getc(file) != '\n');
-
-    printf("Bag capacity: %i\n", capacity);
 
     int items_count = 0;
     int number_buffer;
@@ -173,11 +166,6 @@ void run_bin_algorithm(BinProblemStruct *problem)
     }
 
     // PROPER ALGORITHM EXECUTION
-
-
-
-
-
     clock_t begin = clock();
     problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
     clock_t end = clock();
