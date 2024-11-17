@@ -18,7 +18,7 @@ typedef struct
     char* file_path;
     int* solution;
     int solution_size;
-    time_t time_taken;
+    double time_taken;
     int items_amount;
     int capacity;
     BinItemStruct *items;
@@ -173,12 +173,16 @@ void run_bin_algorithm(BinProblemStruct *problem)
     }
 
     // PROPER ALGORITHM EXECUTION
-    time_t start_time, end_time;
-    start_time = time(NULL);
-    problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
-    end_time = time(NULL);
 
-    problem->time_taken = end_time - start_time;
+
+
+
+
+    clock_t begin = clock();
+    problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+    clock_t end = clock();
+
+    problem->time_taken = ((double)end - (double)begin) / CLOCKS_PER_SEC;
 
     problem->items = items;
 
