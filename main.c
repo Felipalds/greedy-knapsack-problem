@@ -32,6 +32,7 @@ int main(int argc, char** args) {
     printf("Total weight: %i\n", sum_weight);
     printf("Time taken: %lf seconds\n", bin_problem.time_taken);
     printf("Items amount: %i\n", bin_problem.items_amount);
+    printf("Items taken: %i\n", bin_problem.solution_size);
 
     free_bin_problem_struct(&bin_problem);
 }
