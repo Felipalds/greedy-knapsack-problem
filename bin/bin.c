@@ -7,26 +7,30 @@
 
 typedef struct
 {
-    char* file_path;
-    int* solution;
-    int solution_size;
-    time_t time_taken;
-    int items_amount;
-    int capacity;
-} BinProblemStruct;
-
-typedef struct
-{
     int index;
     int profit;
     int weight;
     float profit_weight_ratio;
 } BinItemStruct;
 
+typedef struct
+{
+    char* file_path;
+    int* solution;
+    int solution_size;
+    time_t time_taken;
+    int items_amount;
+    int capacity;
+    BinItemStruct *items;
+} BinProblemStruct;
+
 void free_bin_problem_struct(BinProblemStruct *problem)
 {
     free(problem->solution);
+    free(problem->items);
 }
+
+// MERGE SORT
 
 void merge(BinItemStruct *arr, int l, int m, int r)
 {
@@ -122,6 +126,7 @@ int* bin_algorithm(BinItemStruct *items, int items_count, int *solution_size, in
 
 void run_bin_algorithm(BinProblemStruct *problem)
 {
+    // READING AND PRE PROCESSING
     FILE* file = fopen(problem->file_path, "r");
 
     int capacity;
@@ -138,7 +143,7 @@ void run_bin_algorithm(BinProblemStruct *problem)
 
     while ((read_buffer = getc(file)) != '\n' && read_buffer != EOF)
     {
-        if (read_buffer == '\t') items_count++;
+        if (read_buffer == '\t' || read_buffer == ' ') items_count++;
     }
 
     BinItemStruct *items = malloc(items_count*sizeof(BinItemStruct));
@@ -167,6 +172,7 @@ void run_bin_algorithm(BinProblemStruct *problem)
         items_copy[i] = items[i];
     }
 
+    // PROPER ALGORITHM EXECUTION
     time_t start_time, end_time;
     start_time = time(NULL);
     problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
@@ -174,24 +180,8 @@ void run_bin_algorithm(BinProblemStruct *problem)
 
     problem->time_taken = end_time - start_time;
 
-    printf("Solution: ");
-    for (int i = 0; i < problem->solution_size; i++)
-    {
-        printf("%i ", problem->solution[i]);
-    }
-    printf("\n");
+    problem->items = items;
 
-    int sum_profit = 0, sum_weight = 0;
-    for (int i = 0; i < problem->solution_size; i++)
-    {
-        sum_profit += items[problem->solution[i]].profit;
-        sum_weight += items[problem->solution[i]].weight;
-    }
-
-    printf("Total profit: %i\n", sum_profit);
-    printf("Total weight: %i\n", sum_weight);
-
-    free(items);
     free(items_copy);
     fclose(file);
     return;
