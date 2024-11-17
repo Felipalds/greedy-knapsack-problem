@@ -1,0 +1,16 @@
+file_name, time_taken, items_amount, max_capacity, total_profit, total_weight
+data/Mochila10.txt, 0.000004, 10, 105, 178, 102
+data/Mochila100.txt, 0.000017, 100, 1198, 2028, 1198
+data/Mochila1000.txt, 0.000172, 1000, 4230, 12072, 4230
+data/Mochila1250.txt, 0.000169, 1250, 17313, 27479, 17312
+data/Mochila1500.txt, 0.000228, 1500, 23631, 33639, 23631
+data/Mochila200.txt, 0.000021, 200, 3483, 5229, 3482
+data/Mochila2000.txt, 0.000245, 2000, 27639, 43194, 27639
+data/Mochila2500.txt, 0.000354, 2500, 397600, 60921, 53762
+data/Mochila300.txt, 0.000032, 300, 6312, 7203, 6309
+data/Mochila3000.txt, 0.000470, 3000, 1924, 15490, 1924
+data/Mochila4000.txt, 0.000605, 4000, 19105, 53520, 19105
+data/Mochila50.txt, 0.000005, 50, 943, 1196, 942
+data/Mochila500.txt, 0.000055, 500, 8240, 11889, 8240
+data/Mochila5000.txt, 0.000708, 5000, 178517, 124687, 111308
+data/Mochila750.txt, 0.000086, 750, 160235, 18068, 16801

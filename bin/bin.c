@@ -95,6 +95,7 @@ void merge_sort(BinItemStruct *items, int l, int r)
 
 int* bin_algorithm(BinItemStruct *items, int items_count, int *solution_size, int max_capacity)
 {
+    *solution_size = 0;
     int *solution = malloc(0);
     for (int i = 0; i < items_count; i++)
     {
