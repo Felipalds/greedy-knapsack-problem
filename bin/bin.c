@@ -108,7 +108,7 @@ int* bin_algorithm(BinItemStruct *items, int items_count, int *solution_size, in
 
     while (capacity < max_capacity && i < items_count)
     {
-        if ((capacity + items[i].weight) < max_capacity)
+        if ((capacity + items[i].weight) <= max_capacity)
         {
             solution = realloc(solution, (++(*solution_size) + 1)*sizeof(int));
             solution[(*solution_size) - 1] = items[i].index;
