@@ -13,15 +13,20 @@ typedef struct
     float profit_weight_ratio;
 } BinItemStruct;
 
+typedef enum {
+    FRACTIONARY,
+    BINARY
+} AlgorithmType;
+
 typedef struct
 {
-    char* file_path;
     int* solution;
     int solution_size;
     double time_taken;
     int items_amount;
     int capacity;
     BinItemStruct *items;
+    AlgorithmType algorithm_type;
 } BinProblemStruct;
 
 void free_bin_problem_struct(BinProblemStruct *problem)
@@ -119,13 +124,43 @@ int* bin_algorithm(BinItemStruct *items, int items_count, int *solution_size, in
     return solution;
 }
 
-void run_bin_algorithm(BinProblemStruct *problem)
+int* frac_algorithm(BinItemStruct *items, int items_count, int *solution_size, int max_capacity)
 {
-    // READING AND PRE PROCESSING
-    FILE* file = fopen(problem->file_path, "r");
+    int *solution = malloc(0);
+    for (int i = 0; i < items_count; i++)
+    {
+        items[i].profit_weight_ratio = ((float) items[i].profit) / ((float) items[i].weight);
+    }
+
+    merge_sort(items, 0, items_count - 1);
+
+    int capacity = 0;
+    int i = 0;
+
+    while (capacity < max_capacity && i < items_count)
+    {
+        if ((capacity + items[i].weight) < max_capacity)
+        {
+            solution = realloc(solution, (++(*solution_size) + 1)*sizeof(int));
+            solution[(*solution_size) - 1] = items[i].index;
+            capacity += items[i].weight;
+        }
+        else
+        {
+            solution = realloc(solution, (++(*solution_size) + 1)*sizeof(int));
+            solution[(*solution_size) - 1] = items[i].index;
+            break;
+        }
+        i++;
+    }
+    return solution;
+}
+
+
+void run_bin_algorithm(BinProblemStruct *problem, FILE* file)
+{
 
     int capacity;
-
     fscanf(file, "%i", &capacity);
     while (getc(file) != '\n');
 
@@ -167,7 +202,12 @@ void run_bin_algorithm(BinProblemStruct *problem)
 
     // PROPER ALGORITHM EXECUTION
     clock_t begin = clock();
-    problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+    if (problem->algorithm_type == BINARY) {
+        problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+    }
+    if (problem->algorithm_type == FRACTIONARY) {
+        problem->solution = frac_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+    }
     clock_t end = clock();
 
     problem->time_taken = ((double)end - (double)begin) / CLOCKS_PER_SEC;
