@@ -28,13 +28,6 @@ void free_bin_problem_struct(BinProblemStruct *problem)
     free(problem->solution);
 }
 
-void swap(BinItemStruct *a, BinItemStruct *b)
-{
-    BinItemStruct aux = *a;
-    *a = *b;
-    *b = aux;
-}
-
 void merge(BinItemStruct *arr, int l, int m, int r)
 {
     int left = m - l + 1, right = r - m;
