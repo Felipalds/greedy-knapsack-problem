@@ -202,18 +202,23 @@ void run_bin_algorithm(BinProblemStruct *problem, FILE* file)
     }
 
     // PROPER ALGORITHM EXECUTION
-    clock_t begin = clock();
+    clock_t begin = 0;
+    clock_t end = 0;
     if (problem->algorithm_type == BINARY) {
+        begin = clock();
         problem->solution = bin_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+        end = clock();
     }
     if (problem->algorithm_type == FRACTIONARY) {
+        begin = clock();
         problem->solution = frac_algorithm(items_copy, items_count, &(problem->solution_size), capacity);
+        end = clock();
     }
-    clock_t end = clock();
 
     problem->time_taken = ((double)end - (double)begin) / CLOCKS_PER_SEC;
 
     problem->items = items;
+    problem->capacity = capacity;
 
     free(items_copy);
     fclose(file);
